@@ -1,4 +1,4 @@
-<template> 
+<template class="header"> 
     <div>
         Header
     </div>
@@ -11,6 +11,9 @@
 </script>  
 
 <style>
-    .header {}
+    .header {
+        background: #000;
+        color: #fff;
+    }
 
 </style>
