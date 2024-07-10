@@ -18,8 +18,14 @@
     To-do list
   </h3>
 
-  <p :class="['text', {'text-home': isHome}]">
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate optio minus eum animi, accusamus tempora reiciendis dolor libero a, consectetur officiis aut nam. Repellendus culpa aperiam, illum ullam at nesciunt!
+  <!--Classe em variável que pega a classe style-->
+  <p :class="pClass">
+    Esse texto possui estilização variável. Possui a classe text ou text-home. Como estamos na home, ele é azul claro.
+  </p>
+
+  <!--Bind no style, passamos uma variável que possui o style-->
+  <p :style="styleClass">
+    Esse texto recebe seu estilo por meio de uma variável exportada na seção default desse arquivo. 
   </p>
 
   <!--O v-bind torna o atributo dinâmico, diz que seu valor é uma variável-->
@@ -37,6 +43,37 @@
       {{index}} - {{ obj.title}}
   </div>
 
+  <!-- diretiva v-model (two way significa que o sistema e o usuário editam o valor)-->
+  <div>
+      <div>
+          <br>
+          Two-way data binding<br>
+          v-model -> formulários <br> <br>
+      </div>
+
+      <div>
+        <label>Nome:</label> <br>
+        <input
+          v-model="name"
+          type="text"
+        > <br><br>
+        Nome digitado: {{name}}
+      </div>
+
+      <br><br>
+
+      <div>
+        <label>Sports:</label> <br>
+        <select v-model="sports">
+          <option value="padrao">Escolha</option>
+          <option value="futebol">Futs</option>
+          <option value="skate">SK8</option>
+          <option value="padel">Pads</option>
+        </select>
+        <br><br> Valor da variável: {{sports}}
+      </div>
+
+  </div>
 </template>
 
 <script>
@@ -56,39 +93,41 @@ export default {
       showName: false,
       accessLevel: 'admin',
       classVar: 'title',
+      styleClass: {'color': 'pink', backgroundColor: 'green'},
       isHome: true,
-      pClass: 'text',
+      pClass: ['text', 'text-home'],
+      sports:'padrao',
       todos: [
                     {
                         "userId": 1,
                         "id": 1,
-                        "title": "delectus aut autem",
-                        "completed": false, 
+                        "title": "Pegar café",
+                        "completed": true, 
                         "imgSrc": 'https://via.placeholder.com/15'
                     },
                     {
                         "userId": 1,
                         "id": 2,
-                        "title": "quis ut nam facilis et officia qui",
+                        "title": "Monitorar chamados",
                         "completed": false,
                         "imgSrc": 'https://via.placeholder.com/15'
                     },
                     {
                         "userId": 1,
                         "id": 3,
-                        "title": "fugiat veniam minus",
+                        "title": "Analisar kanbans",
                         "completed": false
                     },
                     {
                         "userId": 1,
                         "id": 4,
-                        "title": "et porro tempora",
+                        "title": "Corrigir o Portal da Transparência",
                         "completed": true
                     },
                     {
                         "userId": 1,
                         "id": 5,
-                        "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+                        "title": "Aprender Vue",
                         "completed": false
                     }
                 ]  
