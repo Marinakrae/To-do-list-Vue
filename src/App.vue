@@ -56,7 +56,7 @@
         <input
           v-model="name"
           type="text"
-        > <br><br>
+        > <br>
         Nome digitado: {{name}}
       </div>
 
@@ -70,7 +70,57 @@
           <option value="skate">SK8</option>
           <option value="padel">Pads</option>
         </select>
-        <br><br> Valor da variável: {{sports}}
+        <br> Valor da variável: {{sports}}
+      </div>
+
+      <br><br>
+
+      <div>
+        <label>Newsletter</label> <br>
+        <input
+          v-model="newsletter"
+          type="radio"
+          value="Sim"
+        > Sim
+
+        <input
+          v-model="newsletter"
+          type="radio"
+          value="Não"
+        > Não <br>
+        O usuário quer receber? {{newsletter}}
+
+      </div>
+
+      <br><br>
+
+      <div>
+        <label> Contrato </label> <br>
+        <input
+          v-model="aceiteContrato"
+          type="checkbox"
+        > <br> Aceita os nossos termos? 
+
+        {{aceiteContrato}}
+      </div>
+
+      <br><br>
+
+      <div>
+        <label> Cores que você mais gosta: </label> <br>
+        <input
+          v-model="colors"
+          type="checkbox"
+          value="Rosa"
+        > Rosa
+
+        <input
+          v-model="colors"
+          type="checkbox"
+          value="Roxo"
+        > Roxo
+
+        <br>{{colors}}
       </div>
 
   </div>
@@ -97,6 +147,9 @@ export default {
       isHome: true,
       pClass: ['text', 'text-home'],
       sports:'padrao',
+      newsletter: 'Sim',
+      aceiteContrato: false,
+      colors: [],
       todos: [
                     {
                         "userId": 1,
