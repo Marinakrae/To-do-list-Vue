@@ -120,10 +120,36 @@
           value="Roxo"
         > Roxo
 
-        <br>{{colors}}
+        <br>{{colors}}<br><br>
       </div>
+  </div>
+
+  <!--Diretiva v-on - Pega os eventos do js-->
+  <!--v-on pode ser substituído por @-->
+  <div>
+    <!--Pega o evento do clique do botão-->
+    <button @click="onClick">
+      Clique aqui
+    </button> <br><br>
+
+    <div @mouseover="onMouseOver"
+         @mouseout="onMouseOut"
+    >
+      Passe o mouse  
+    </div>
+
+    <br><br>
+
+    <form 
+        action="https://google.com"
+        v-on:submit="onSubmit">
+      <button type="submit">
+        Enviar
+      </button>
+    </form>
 
   </div>
+
 </template>
 
 <script>
@@ -183,8 +209,19 @@ export default {
                         "title": "Aprender Vue",
                         "completed": false
                     }
-                ]  
+                ]        
     }  
+  },
+  methods: {
+    onClick($evento) {
+      console.log('click', $evento);
+    },
+    onMouseOver($evento) {
+      console.log("mouse over", $evento);
+    },
+    onMouseOut($evento){
+      console.log("mouse out", $evento)
+    }
   }
 }
 </script>
