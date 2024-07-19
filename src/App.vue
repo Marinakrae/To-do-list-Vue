@@ -127,8 +127,9 @@
   <!--Diretiva v-on - Pega os eventos do js-->
   <!--v-on pode ser substituído por @-->
   <div>
-    <!--Pega o evento do clique do botão-->
-    <button @click="onClick">
+    <!--Pega o evento do clique do botão (Click)-->
+    <!--Modificador Once faz com que o método seja executado apenas na 1 vez que é clicado-->
+    <button @click.once="onClick">
       Clique aqui
     </button> <br><br>
 
@@ -142,7 +143,12 @@
 
     <form 
         action="https://google.com"
-        v-on:submit="onSubmit">
+        @submit.prevent="onSubmit"
+    >
+      <input
+        type="text"
+        @keyup.enter="onKeyUp"
+      >
       <button type="submit">
         Enviar
       </button>
@@ -221,6 +227,12 @@ export default {
     },
     onMouseOut($evento){
       console.log("mouse out", $evento)
+    },
+    onSubmit($evento) {
+      console.log('submit', $evento);
+    },
+    onKeyUp($evento){
+      console.log('apertou enter', $evento);
     }
   }
 }
