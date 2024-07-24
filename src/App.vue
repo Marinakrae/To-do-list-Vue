@@ -28,10 +28,11 @@
     Esse texto recebe seu estilo por meio de uma variável exportada na seção default desse arquivo. 
   </p>
 
+  <h2>To-dos em aberto</h2>
   <!--O v-bind torna o atributo dinâmico, diz que seu valor é uma variável-->
   <!--v-bind: pode ser substituído por : apenas-->
   <div   
-      v-for="(obj, index) in todos"
+      v-for="(obj, index) in uncompletedTodos"
       :key="obj.id"
       class="todos-item"
   >
@@ -40,7 +41,35 @@
         v-bind:src="obj.imgSrc"
       >  
       <!-- essa variável corresponde ao objeto da posição atual do loop-->
-      {{index}} - {{ obj.title}}
+      {{index}} - {{obj.title}} - <span>{{obj.completed}}</span>
+  </div>
+
+  <h2>To-dos completas</h2>
+  <div   
+      v-for="(obj, index) in completedTodos"
+      :key="obj.id"
+      class="todos-item"
+  >
+      <img 
+        v-if="obj.imgSrc" 
+        v-bind:src="obj.imgSrc"
+      >  
+      {{index}} - {{obj.title}} - <span>{{obj.completed}}</span>
+  </div>
+
+  <br><br><br>
+
+  <h2>To-dos</h2>
+  <div   
+      v-for="todo in todos"
+      :key="todo.id"
+      class="todos-item"
+  >
+      <input
+        v-model="todo.completed"
+        type="checkbox"
+      >
+      {{ todo.title }}
   </div>
 
   <!-- diretiva v-model (two way significa que o sistema e o usuário editam o valor)-->
@@ -153,6 +182,16 @@
         Enviar
       </button>
     </form>
+    <br><br>
+    <div>
+      <button @click="onClick">This</button>
+      <br>
+      {{user.first_name}} {{user.last_name}}
+      <br>
+      <!--Propriedade computada-->
+      {{fullName}}
+    </div>
+
 
   </div>
 
@@ -194,7 +233,7 @@ export default {
                         "userId": 1,
                         "id": 2,
                         "title": "Monitorar chamados",
-                        "completed": false,
+                        "completed": true,
                         "imgSrc": 'https://via.placeholder.com/15'
                     },
                     {
@@ -207,20 +246,39 @@ export default {
                         "userId": 1,
                         "id": 4,
                         "title": "Corrigir o Portal da Transparência",
-                        "completed": true
+                        "completed": false
                     },
                     {
                         "userId": 1,
                         "id": 5,
                         "title": "Aprender Vue",
-                        "completed": false
+                        "completed": true
                     }
-                ]        
+              ],        
+      user: {
+        first_name: 'Hatsune',
+        last_name: 'Miku',
+      }
     }  
+  },
+  computed: {
+    //essa camada possui funções que são tratadas como propriedades normais
+    fullName(){
+      //acessa-se as propriedades com o this.
+      return `${this.user.first_name} ${this.user.last_name}`
+    },
+    //filtro para retornar apenas os itens não completos
+    uncompletedTodos(){
+      return this.todos.filter(todo => !todo.completed);
+    },
+    completedTodos(){
+      return this.todos.filter(todo => todo.completed);
+    },
   },
   methods: {
     onClick($evento) {
       console.log('click', $evento);
+      console.log(this.user);
     },
     onMouseOver($evento) {
       console.log("mouse over", $evento);
